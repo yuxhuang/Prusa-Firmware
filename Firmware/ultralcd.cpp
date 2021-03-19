@@ -3511,7 +3511,13 @@ bool lcd_calibrate_z_end_stop_manual(bool only_z)
 calibrated:
     // Let the machine think the Z axis is a bit higher than it is, so it will not home into the bed
     // during the search for the induction points.
+    #ifdef BONDTECH_LGX {
+      current_position[Z_AXIS] = Z_MAX_POS+2.f;
+    }
+    #else {
     current_position[Z_AXIS] = Z_MAX_POS-3.f;
+    }
+    #endif
     plan_set_position_curposXYZE();
     return true;
 
@@ -6419,12 +6425,19 @@ void unload_filament()
     raise_z_above(MIN_Z_FOR_UNLOAD);
 
 	//		extr_unload2();
-
+  #ifdef BONDTECH_LGX
+  	current_position[E_AXIS] -= 8;
+  	plan_buffer_line_curposXYZE(5200 / 60);
+  	st_synchronize();
+  	current_position[E_AXIS] -= 10;
+  	plan_buffer_line_curposXYZE(1000 / 60);
+  #else
 	current_position[E_AXIS] -= 45;
 	plan_buffer_line_curposXYZE(5200 / 60);
 	st_synchronize();
 	current_position[E_AXIS] -= 15;
 	plan_buffer_line_curposXYZE(1000 / 60);
+  #endif
 	st_synchronize();
 	current_position[E_AXIS] -= 20;
 	plan_buffer_line_curposXYZE(1000 / 60);
