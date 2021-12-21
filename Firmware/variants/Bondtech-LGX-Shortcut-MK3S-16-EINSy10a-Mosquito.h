@@ -19,7 +19,7 @@
 #define DEVELOPER
 
 // Printer name
-#define CUSTOM_MENDEL_NAME "LGX-FF-HT MK3S"
+#define CUSTOM_MENDEL_NAME "LGX-SM MK3S"
 
 // Electronics
 #define MOTHERBOARD BOARD_EINSY_1_0a
@@ -36,7 +36,8 @@
 //#define E3D_PT100_BED_NO_AMP
 
 // Extruder
-#define BONDTECH_LGX
+//#define BONDTECH_LGX_SC //Shortcut Copperhead
+#define BONDTECH_LGX_SM //Shortcut Mosquito
 //#define BONDTECH_MK3S
 //#define BONDTECH_MOSQUITO
 //#define BONDTECH_MOSQUITO_MAGNUM
@@ -71,7 +72,7 @@
 // Travel limits after homing
 #define X_MAX_POS 255
 #define X_MIN_POS 0
-#define Y_MAX_POS 212.5
+#define Y_MAX_POS 206.5
 #define Y_MIN_POS -4 //orig -4
 #define Z_MAX_POS 210
 #define Z_MIN_POS 0.15
@@ -593,7 +594,7 @@
 #elif defined(E3D_PT100_EXTRUDER_NO_AMP)
 #define TEMP_SENSOR_0 148
 #else
-#define TEMP_SENSOR_0 800
+#define TEMP_SENSOR_0 5
 #endif
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
