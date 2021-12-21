@@ -2336,12 +2336,11 @@ bool calibrate_z_auto()
 	plan_buffer_line_destinationXYZE(feedrate / 60);
 	st_synchronize();
 	enable_endstops(endstops_enabled);
-	if (PRINTER_TYPE == PRINTER_MK3) {
-		current_position[Z_AXIS] = Z_MAX_POS + 2.0;
-	}
-	else {
-		current_position[Z_AXIS] = Z_MAX_POS + 9.0;
-	}
+  #ifdef BONDTECH_LGX
+	   current_position[Z_AXIS] = Z_MAX_POS + 4.0;
+  #else
+	current_position[Z_AXIS] = Z_MAX_POS + 2.0;
+  #endif
 	plan_set_position_curposXYZE();
 	return true;
 }
@@ -3886,12 +3885,20 @@ void gcode_M701()
 #endif //FSENSOR_QUALITY
 
 		lcd_setstatuspgm(_T(MSG_LOADING_FILAMENT));
+    #ifdef BONDTECH_LGX
+		  current_position[E_AXIS] += 20;
+    #else
 		current_position[E_AXIS] += 40;
+    #endif
 		plan_buffer_line_curposXYZE(400 / 60); //fast sequence
 		st_synchronize();
 
         raise_z_above(MIN_Z_FOR_LOAD, false);
+    #ifdef BONDTECH_LGX
+		  current_position[E_AXIS] += 20;
+    #else
 		current_position[E_AXIS] += 30;
+    #endif
 		plan_buffer_line_curposXYZE(400 / 60); //fast sequence
 		
 		load_filament_final_feed(); //slow sequence
