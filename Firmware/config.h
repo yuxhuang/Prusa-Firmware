@@ -56,7 +56,11 @@
 
 //LANG - Multi-language support
 //#define LANG_MODE              0 // primary language only
+<<<<<<< Updated upstream
 #define LANG_MODE              1 // sec. language support
+=======
+#define LANG_MODE              0 // sec. language support
+>>>>>>> Stashed changes
 
 #define LANG_SIZE_RESERVED     0x3000 // reserved space for secondary language (12288 bytes)
 
